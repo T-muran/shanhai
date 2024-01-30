@@ -1,3 +1,0 @@
-Scene\Main.unity ：Main Scene
-
-Tiles :背景
