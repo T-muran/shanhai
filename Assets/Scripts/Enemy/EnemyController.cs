@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     private Transform target;
     public float damage;
 
-    //¹¥»÷ÉËº¦¼ä¾à
+    //??????????
     public float hitWaitTime = 1;
     private float hitCounter;
 
@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         enemy.velocity = (target.position - transform.position).normalized * moveSpeed;
-        //¹¥»÷¼ä¸ôÊ±¼ä
+        //??????????
         if(hitCounter > 0f)
         {
             hitCounter -= Time.deltaTime;
@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.tag == "Player" && hitCounter <= 0f)
         {
             PlayerHealthController.instance.TakeDamage(damage);
-            //Ë¢ÐÂ¹¥»÷¼ä¸ô
+            //?????????
             hitCounter = hitWaitTime;
         }
     }
