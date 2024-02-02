@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Shanhai.sln"
+    "dotnet.defaultSolution": "Shanhai.sln",
+    "C_Cpp.errorSquiggles": "enabled"
 }
