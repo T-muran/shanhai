@@ -25,19 +25,27 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemy.velocity = (target.position - transform.position).normalized * moveSpeed;
-        //??????????
-        if(hitCounter > 0f)
+        //如果玩家死亡，敌人不再移动
+        if (PlayerHealthController.instance.currentHealth > 0)
         {
-            hitCounter -= Time.deltaTime;
-        }
-        if(target.position.x > transform.position.x)
-        {
-            theSR.flipX = true;
+            enemy.velocity = (target.position - transform.position).normalized * moveSpeed;
+            //攻击间隔时间
+            if (hitCounter > 0f)
+            {
+                hitCounter -= Time.deltaTime;
+            }
+            if (target.position.x > transform.position.x)
+            {
+                theSR.flipX = true;
+            }
+            else
+            {
+                theSR.flipX = false;
+            }
         }
         else
         {
-            theSR.flipX = false;
+            enemy.velocity = Vector2.zero;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

@@ -14,8 +14,6 @@ public class EnemySpawner : MonoBehaviour
     public Transform minSpawn, maxSpawn;
 
     private Transform target;
-
-    // Start is called before the first frame update
     void Start()
     {
         spawnCounter = timeToSpawn;
@@ -23,11 +21,11 @@ public class EnemySpawner : MonoBehaviour
         target = PlayerHealthController.instance.transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
         spawnCounter -= Time.deltaTime;
-        if(spawnCounter <= 0)
+        //如果玩家死亡，不再生成敌人
+        if (spawnCounter <= 0 && PlayerHealthController.instance.currentHealth > 0)
         {
             spawnCounter = timeToSpawn;
 
