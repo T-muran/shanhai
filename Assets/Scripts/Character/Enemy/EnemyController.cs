@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     private SpriteRenderer theSR;
     public float damage;
 
-    //??????????
+    //攻击间隔时间
     public float hitWaitTime = 1;
     private float hitCounter;
 
@@ -45,7 +45,7 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.tag == "Player" && hitCounter <= 0f)
         {
             PlayerHealthController.instance.TakeDamage(damage);
-            //?????????
+            //间隔时间刷新
             hitCounter = hitWaitTime;
         }
     }
