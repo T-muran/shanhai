@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         inputDirection = inputControl.GamePlay.Move.ReadValue<Vector2>();
         //移动动画判定
-        animator.SetFloat("Running", Mathf.Abs(rb.velocity.x)+ Mathf.Abs(rb.velocity.y));
+        animator.SetFloat("Running", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
     }
 
     private void FixedUpdate()
