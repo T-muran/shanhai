@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     public PlayerInputControl inputControl;
     public Animator animator;  // 引入动画器组件
     public Vector2 inputDirection;
+
+    public Transform healthBar;
+
     [Header("基本参数")]
     public float speed;
 
@@ -34,12 +37,14 @@ public class PlayerController : MonoBehaviour
         inputDirection = inputControl.GamePlay.Move.ReadValue<Vector2>();
         //移动动画判定
         animator.SetFloat("Running", Mathf.Abs(rb.velocity.x)+ Mathf.Abs(rb.velocity.y));
+
     }
 
     private void FixedUpdate()
     {
         Move();
         Flip();
+        healthBar.position = new Vector2(transform.position.x, transform.position.y);
     }
 
     public void Move()
