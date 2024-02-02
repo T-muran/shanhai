@@ -23,6 +23,8 @@ public class UIManager
     public UIManager()
     {
         instance = this;
+        stackUI = new Stack<BasePanel>();
+        dictUIObject = new Dictionary<string, GameObject>();
     }
 
     public GameObject GetSingleObject(UIType uiType)
@@ -33,9 +35,7 @@ public class UIManager
         }
         if (canvasObj == null)
         {
-            //待优化
-            Debug.LogError("CanvasObj is null");
-            return null;
+            canvasObj = UIMethod.GetInstance().FindCanvas();
         }
         GameObject uiObject = GameObject.Instantiate(Resources.Load<GameObject>(uiType.Path), canvasObj.transform) as GameObject;
         return uiObject;
@@ -65,7 +65,7 @@ public class UIManager
         }
         else
         {
-            if(stackUI.Peek().uiType.Name != panel.uiType.Name)
+            if (stackUI.Peek().uiType.Name != panel.uiType.Name)
             {
                 stackUI.Push(panel);
             }
@@ -82,9 +82,9 @@ public class UIManager
     public void Pop(bool isLoad)
     {
         //栈清空
-        if(isLoad==true)
+        if (isLoad == true)
         {
-            while(stackUI.Count>0)
+            while (stackUI.Count > 0)
             {
                 stackUI.Peek().OnDisable();
                 stackUI.Peek().OnDestroy();
@@ -94,8 +94,9 @@ public class UIManager
             }
         }
         //弹出栈顶
-        else{
-            if(stackUI.Count>0)
+        else
+        {
+            if (stackUI.Count > 0)
             {
                 stackUI.Peek().OnDisable();
                 stackUI.Peek().OnDestroy();
@@ -103,7 +104,7 @@ public class UIManager
                 dictUIObject.Remove(stackUI.Peek().uiType.Name);
                 stackUI.Pop();
 
-                if(stackUI.Count>0)
+                if (stackUI.Count > 0)
                 {
                     stackUI.Peek().OnEnable();
                 }

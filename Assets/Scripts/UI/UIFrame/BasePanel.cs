@@ -18,17 +18,21 @@ public class BasePanel
     public virtual void OnStart()
     {
         Debug.Log($"OnStart:{uiType.Name}");
-    }
-    
-    public virtual void OnEnable(){
-
+        UIMethod.GetInstance().AddOrGetComponent<CanvasGroup>(ActiceObj).interactable = true;
     }
 
-    public virtual void OnDisable(){
-    
+    public virtual void OnEnable()
+    {
+        UIMethod.GetInstance().AddOrGetComponent<CanvasGroup>(ActiceObj).interactable = true;
     }
 
-    public virtual void OnDestroy(){
-    
+    public virtual void OnDisable()
+    {
+        UIMethod.GetInstance().AddOrGetComponent<CanvasGroup>(ActiceObj).interactable = false;
     }
+
+    public virtual void OnDestroy()
+    {
+        UIMethod.GetInstance().AddOrGetComponent<CanvasGroup>(ActiceObj).interactable = false;
     }
+}
