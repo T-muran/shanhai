@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
         uIManager.canvasObj = UIMethod.GetInstance().FindCanvas();
 
         #region 推入第一个面板
-
+        uIManager.Push(new StartPanel());
         #endregion
     }
 }
