@@ -38,6 +38,9 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         uIManager.canvasObj = UIMethod.GetInstance().FindCanvas();
 
+        Scene1 scene1 = new Scene1();
+        SceneControl.dictScene.Add(scene1.sceneName, scene1);
+        
         #region 推入第一个面板
         uIManager.Push(new StartPanel());
         #endregion

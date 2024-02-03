@@ -16,6 +16,16 @@ public class SceneControl
         return instance;
     }
 
+    public SceneControl()
+    {
+        dictScene = new Dictionary<string, SceneBase>();
+    }
+
+    /// <summary>
+    /// 加载场景
+    /// </summary>
+    /// <param name="sceneName">目标场景的名称</param>
+    /// <param name="sceneBase">目标场景的sceneBase</param>
     public void LoadScene(string sceneName, SceneBase sceneBase)
     {
         if (!dictScene.ContainsKey(sceneName))

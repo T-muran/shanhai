@@ -18,6 +18,7 @@ public class StartPanel : BasePanel
     {
         base.OnStart();
         UIMethod.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiceObj, "Back").onClick.AddListener(Back);
+        UIMethod.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiceObj, "Load").onClick.AddListener(Load);
     }
 
     public override void OnEnable()
@@ -41,5 +42,13 @@ public class StartPanel : BasePanel
     private void Back()
     {
         GameController.GetInstance().UIManager.Pop(false);
+        //退出游戏
+        Application.Quit();
+    }
+
+    private void Load()
+    {
+        Scene2 scene2 = new Scene2();
+        GameController.GetInstance().SceneControl.LoadScene(scene2.sceneName, scene2);
     }
 }
