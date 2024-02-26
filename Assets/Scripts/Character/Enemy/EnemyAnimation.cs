@@ -25,16 +25,17 @@ public class EnemyAnimation : MonoBehaviour
     {
         sprite.localScale = Vector3.MoveTowards(sprite.localScale, Vector3.one * activeSize, speed * Time.deltaTime);
 
-        if(sprite.localScale.x == activeSize)
+        if (sprite.localScale == Vector3.one * activeSize)
         {
-            if(activeSize == maxSize)
-            {
-                activeSize = minSize;
-            }
-            else
-            {
-                activeSize = maxSize;
-            }
+            StartCoroutine(ChangeSize());
         }
+    }
+
+    IEnumerator ChangeSize()
+    {
+        // yield return new WaitForSeconds(0.5f);
+        activeSize = minSize;
+        yield return new WaitForSeconds(0.5f);
+        activeSize = maxSize;
     }
 }
