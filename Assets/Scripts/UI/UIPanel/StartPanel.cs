@@ -17,8 +17,9 @@ public class StartPanel : BasePanel
     public override void OnStart()
     {
         base.OnStart();
-        UIMethod.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiceObj, "Back").onClick.AddListener(Back);
         UIMethod.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiceObj, "Load").onClick.AddListener(Load);
+        UIMethod.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiceObj, "Exit").onClick.AddListener(Exit);
+        UIMethod.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiceObj, "Setting").onClick.AddListener(Setting);
     }
 
     public override void OnEnable()
@@ -39,7 +40,7 @@ public class StartPanel : BasePanel
         Debug.Log("StartPanel OnDestroy");
     }
 
-    private void Back()
+    private void Exit()
     {
         GameController.GetInstance().UIManager.Pop(false);
         //退出游戏
@@ -50,5 +51,10 @@ public class StartPanel : BasePanel
     {
         Scene2 scene2 = new Scene2();
         GameController.GetInstance().SceneControl.LoadScene(scene2.sceneName, scene2);
+    }
+
+    private void Setting()
+    {
+        GameController.GetInstance().UIManager.Push(new SettingPanel());
     }
 }

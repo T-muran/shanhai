@@ -18,7 +18,7 @@ public class UIMethod
     public GameObject FindCanvas()
     {
         // GameObject gameObject = GameObject.FindObjectOfType<Canvas>().gameObject;
-        GameObject gameObject = GameObject.Find("Canvas");
+        GameObject gameObject = GameObject.Find("CanvasRoot");
         Debug.Log(gameObject.name);
         if (gameObject == null)
         {

@@ -34,8 +34,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         inputDirection = inputControl.GamePlay.Move.ReadValue<Vector2>();
-        //移动动画判定
-        animator.SetFloat("Running", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
         healthBar.position = new Vector2(transform.position.x, transform.position.y + 1.5f);
     }
 
@@ -48,7 +46,8 @@ public class PlayerController : MonoBehaviour
     public void Move()
     {
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, inputDirection.y * speed * Time.deltaTime);
-
+        //移动动画判定
+        animator.SetFloat("Running", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
     }
 
     void Flip()
@@ -60,15 +59,8 @@ public class PlayerController : MonoBehaviour
         bool faceDir = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         if (faceDir)
         {
-            //判断方向
-            if (rb.velocity.x > 0.1f)
-            {
-                animator.SetFloat("Left", -1f);
-            }
-            if (rb.velocity.x < -0.1f)
-            {
-                animator.SetFloat("Left", 1f);
-            }
+            //方向不同传入不同animator的参数
+            animator.SetFloat("Left", rb.velocity.x < 0f ? 1f : -1f);
         }
     }
 }
