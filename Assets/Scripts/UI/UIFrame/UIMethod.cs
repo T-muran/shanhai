@@ -17,7 +17,9 @@ public class UIMethod
     // 获得Canvas对象
     public GameObject FindCanvas()
     {
-        GameObject gameObject = GameObject.FindObjectOfType<Canvas>().gameObject;
+        // GameObject gameObject = GameObject.FindObjectOfType<Canvas>().gameObject;
+        GameObject gameObject = GameObject.Find("Canvas");
+        Debug.Log(gameObject.name);
         if (gameObject == null)
         {
             Debug.LogError("CanvasObj is null");
