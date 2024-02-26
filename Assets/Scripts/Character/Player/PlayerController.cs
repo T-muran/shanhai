@@ -63,11 +63,11 @@ public class PlayerController : MonoBehaviour
             //判断方向
             if (rb.velocity.x > 0.1f)
             {
-                transform.localRotation = Quaternion.Euler(0, 0, 0);
+                animator.SetFloat("Left", -1f);
             }
             if (rb.velocity.x < -0.1f)
             {
-                transform.localRotation = Quaternion.Euler(0, 180, 0);
+                animator.SetFloat("Left", 1f);
             }
         }
     }
