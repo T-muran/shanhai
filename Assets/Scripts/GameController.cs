@@ -1,6 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+
+public enum GameState
+{
+    Load,
+    Play,
+    Pause,
+    Fail,
+}
 
 public class GameController : MonoBehaviour
 {
@@ -9,6 +18,8 @@ public class GameController : MonoBehaviour
     private SceneControl sceneControl;
     public SceneControl SceneControl { get => sceneControl; }
     private static GameController instance;
+    private StateMachine stateMachine;
+    public StateMachine StateMachine { get => stateMachine; }
 
     public static GameController GetInstance()
     {
@@ -36,13 +47,44 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+
+        #region 初始化状态机
+        StateBuilder stateBuilder = new StateBuilder();
+        stateBuilder.AddState<LoadState>(GameState.Load.ToString());
+        stateBuilder.AddState<PlayState>(GameState.Play.ToString());
+        stateMachine = new StateMachine(stateBuilder);
+        stateMachine.ChangeState(GameState.Load.ToString());
+        #endregion
+
+        //UI
         uIManager.canvasObj = UIMethod.GetInstance().FindCanvas();
 
         Scene1 scene1 = new Scene1();
         SceneControl.dictScene.Add(scene1.sceneName, scene1);
-        
+
         #region 推入第一个面板
         uIManager.Push(new StartPanel());
         #endregion
+
     }
 }
+
+#region 状态
+public class LoadState : StateBase
+{
+    protected override void OnEnter()
+    {
+        base.OnEnter();
+        Debug.Log("LoadState OnEnter");
+    }
+}
+
+public class PlayState : StateBase
+{
+    protected override void OnEnter()
+    {
+        base.OnEnter();
+        Debug.Log("PlayState OnEnter");
+    }
+}
+#endregion

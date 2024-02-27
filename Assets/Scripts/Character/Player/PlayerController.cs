@@ -33,14 +33,20 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        inputDirection = inputControl.GamePlay.Move.ReadValue<Vector2>();
-        healthBar.position = new Vector2(transform.position.x, transform.position.y + 1.5f);
+        if (GameController.GetInstance().StateMachine.GetState<PlayState>(GameState.Play.ToString(), out PlayState playState))
+        {
+            inputDirection = inputControl.GamePlay.Move.ReadValue<Vector2>();
+            healthBar.position = new Vector2(transform.position.x, transform.position.y + 1.5f);
+        }
     }
 
     private void FixedUpdate()
     {
-        Move();
-        Flip();
+        if (GameController.GetInstance().StateMachine.GetState<PlayState>(GameState.Play.ToString(), out PlayState playState))
+        {
+            Move();
+            Flip();
+        }
     }
 
     public void Move()
