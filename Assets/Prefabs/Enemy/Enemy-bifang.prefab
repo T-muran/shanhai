@@ -174,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 7697617510905354872}
   moveSpeed: 2
-  damage: 5
+  damage: 25
   hitWaitTime: 1
 --- !u!114 &4651002996541224998
 MonoBehaviour:

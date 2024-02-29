@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         //如果玩家死亡，敌人不再移动
-        if (PlayerHealthController.instance.currentHealth > 0)
+        if (PlayerHealthController.instance.currentHp > 0)
         {
             enemy.velocity = (target.position - transform.position).normalized * moveSpeed;
             //攻击间隔时间

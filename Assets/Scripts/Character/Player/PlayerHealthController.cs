@@ -5,41 +5,71 @@ using UnityEngine.UI;
 
 public class PlayerHealthController : MonoBehaviour
 {
+    public Image hpImg;
+    public Image hpEffectImg;
+
+    public float maxHp = 100f;
+    public float currentHp;
+    public float buffTime = 0.5f;
+
+    private Coroutine updateCoroutine;
+
     public static PlayerHealthController instance;
+
     private void Awake()
     {
-        instance = this;    
+        instance = this;
+    }
+    private void Start()
+    {
+        currentHp = maxHp;
+        UpdateHealthBar();
     }
 
-    public float currentHealth, maxHealth;
-
-    public Slider healthSlider;
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void SetHealth(float health)
     {
-        currentHealth = maxHealth;
-
-        healthSlider.maxValue = maxHealth;
-        healthSlider.value = currentHealth;
+        currentHp = Mathf.Clamp(health, 0f, maxHp);
+        UpdateHealthBar();
+        if (currentHp <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void IncreaseHealth(float amount)
     {
-        
+        SetHealth(currentHp += amount);
     }
 
     public void TakeDamage(float damageToTake)
     {
-        currentHealth -= damageToTake;
+        SetHealth(currentHp -= damageToTake);
+    }
 
-        if(currentHealth <= 0)
+    private void UpdateHealthBar()
+    {
+        hpImg.fillAmount = currentHp / maxHp;
+
+        if (updateCoroutine != null)
         {
-            gameObject.SetActive(false);
+            StopCoroutine(updateCoroutine);
         }
 
-        healthSlider.value = currentHealth;
+        updateCoroutine = StartCoroutine(UpdateHpEffect());
+    }
+
+    private IEnumerator UpdateHpEffect()
+    {
+        float effectLength = hpEffectImg.fillAmount - hpImg.fillAmount;
+        float elapsedTime = 0f;
+
+        while(elapsedTime < buffTime && effectLength != 0)
+        {
+            elapsedTime += Time.deltaTime;
+            hpEffectImg.fillAmount = Mathf.Lerp(hpImg.fillAmount + effectLength, hpImg.fillAmount, elapsedTime / buffTime);
+            yield return null;
+        }
+
+        hpEffectImg.fillAmount = hpImg.fillAmount;
     }
 }
