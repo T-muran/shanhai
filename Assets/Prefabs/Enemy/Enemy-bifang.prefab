@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 891140176867604493}
   m_Layer: 0
   m_Name: Enemy-bifang
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,4 +205,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f04df6fcd6e9c43b95f05008b22562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 0
+  currentHp: 0
+  attackPower: 0
+  moveSpeed: 0
+  attackRange: 0
+  chaseRange: 0
+  stunTime: 0
   currentState: 0

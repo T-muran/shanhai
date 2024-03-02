@@ -26,13 +26,13 @@ public class PlayerHealthController : MonoBehaviour
         UpdateHealthBar();
     }
 
-    private void SetHealth(float health)
+    public void SetHealth(float health)
     {
         currentHp = Mathf.Clamp(health, 0f, maxHp);
         UpdateHealthBar();
         if (currentHp <= 0)
         {
-            gameObject.SetActive(false);
+            SetActive(false);
             GameController.GetInstance().StateMachine.ChangeState(GameController.GameState.Fail.ToString());
             GameController.GetInstance().UIManager.Push(new EndPanel());
         }
@@ -65,7 +65,7 @@ public class PlayerHealthController : MonoBehaviour
         float effectLength = hpEffectImg.fillAmount - hpImg.fillAmount;
         float elapsedTime = 0f;
 
-        while(elapsedTime < buffTime && effectLength != 0)
+        while (elapsedTime < buffTime && effectLength != 0)
         {
             elapsedTime += Time.deltaTime;
             hpEffectImg.fillAmount = Mathf.Lerp(hpImg.fillAmount + effectLength, hpImg.fillAmount, elapsedTime / buffTime);
@@ -73,5 +73,10 @@ public class PlayerHealthController : MonoBehaviour
         }
 
         hpEffectImg.fillAmount = hpImg.fillAmount;
+    }
+
+    public void SetActive(bool active)
+    {
+        gameObject.SetActive(active);
     }
 }

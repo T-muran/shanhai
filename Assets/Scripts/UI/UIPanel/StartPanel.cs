@@ -50,7 +50,8 @@ public class StartPanel : BasePanel
     private void Load()
     {
         Scene2 scene2 = new Scene2();
-        GameController.GetInstance().SceneControl.LoadScene(scene2.sceneName, scene2);
+        GameController.GetInstance().SceneControl.LoadScene("Scene2",scene2);
+        GameController.GetInstance().UIManager.Pop(true);
         GameController.GetInstance().StateMachine.ChangeState(GameController.GameState.Play.ToString());
     }
 

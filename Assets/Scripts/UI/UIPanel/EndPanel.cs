@@ -42,13 +42,20 @@ public class EndPanel : BasePanel
     private void Exit()
     {
         GameController.GetInstance().UIManager.Pop(false);
-        //�˳���Ϸ
+        //退出游戏
         Application.Quit();
     }
 
     private void Mainmenu()
     {
+        //删除所有敌人
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var enemy in enemies)
+        {
+            GameObject.Destroy(enemy);
+        }
         GameController.GetInstance().UIManager.Pop(false);
+        GameController.GetInstance().StateMachine.ChangeState(GameController.GameState.Load.ToString());
         GameController.GetInstance().UIManager.Push(new StartPanel());
     }
 }
