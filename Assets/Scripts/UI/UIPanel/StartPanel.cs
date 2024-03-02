@@ -51,7 +51,7 @@ public class StartPanel : BasePanel
     {
         Scene2 scene2 = new Scene2();
         GameController.GetInstance().SceneControl.LoadScene(scene2.sceneName, scene2);
-        GameController.GetInstance().StateMachine.ChangeState(GameState.Play.ToString());
+        GameController.GetInstance().StateMachine.ChangeState(GameController.GameState.Play.ToString());
     }
 
     private void Setting()

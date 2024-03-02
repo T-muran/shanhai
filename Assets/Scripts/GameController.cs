@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public enum GameState
-{
-    Load,
-    Play,
-    Pause,
-    Fail,
-}
 
 public class GameController : MonoBehaviour
 {
+    public enum GameState
+    {
+        Load,
+        Play,
+        Pause,
+        Fail,
+    }
     private UIManager uIManager;
     public UIManager UIManager { get => uIManager; }
     private SceneControl sceneControl;
@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     private static GameController instance;
     private StateMachine stateMachine;
     public StateMachine StateMachine { get => stateMachine; }
+    public GameState gameState;
 
     public static GameController GetInstance()
     {
@@ -76,6 +77,7 @@ public class LoadState : StateBase
     {
         base.OnEnter();
         Debug.Log("LoadState OnEnter");
+        GameController.GetInstance().gameState = GameController.GameState.Load;
     }
 }
 
@@ -85,6 +87,7 @@ public class PlayState : StateBase
     {
         base.OnEnter();
         Debug.Log("PlayState OnEnter");
+        GameController.GetInstance().gameState = GameController.GameState.Play;
     }
 }
 #endregion
