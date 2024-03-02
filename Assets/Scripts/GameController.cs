@@ -53,6 +53,7 @@ public class GameController : MonoBehaviour
         StateBuilder stateBuilder = new StateBuilder();
         stateBuilder.AddState<LoadState>(GameState.Load.ToString());
         stateBuilder.AddState<PlayState>(GameState.Play.ToString());
+        stateBuilder.AddState<FailState>(GameState.Fail.ToString());
         stateMachine = new StateMachine(stateBuilder);
         stateMachine.ChangeState(GameState.Load.ToString());
         #endregion
@@ -88,6 +89,15 @@ public class PlayState : StateBase
         base.OnEnter();
         Debug.Log("PlayState OnEnter");
         GameController.GetInstance().gameState = GameController.GameState.Play;
+    }
+}
+
+public class FailState : StateBase
+{
+    protected override void OnEnter()
+    {
+        base.OnEnter();
+        Debug.Log("FailState OnEnter");
     }
 }
 #endregion
