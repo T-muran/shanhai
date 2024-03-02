@@ -33,7 +33,7 @@ public class PlayerHealthController : MonoBehaviour
         if (currentHp <= 0)
         {
             gameObject.SetActive(false);
-            GameController.GetInstance().StateMachine.ChangeState(GameState.Fail.ToString());
+            GameController.GetInstance().StateMachine.ChangeState(GameController.GameState.Fail.ToString());
             GameController.GetInstance().UIManager.Push(new EndPanel());
         }
     }
