@@ -25,27 +25,29 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //如果玩家死亡，敌人不再移动
-        if (PlayerHealthController.instance.currentHp > 0)
-        {
-            enemy.velocity = (target.position - transform.position).normalized * moveSpeed;
-            //攻击间隔时间
-            if (hitCounter > 0f)
+        if (GameController.GetInstance().StateMachine.GetState<PlayState>(GameState.Play.ToString(), out PlayState playState)) {
+            //如果玩家死亡，敌人不再移动
+            if (PlayerHealthController.instance.currentHp > 0)
             {
-                hitCounter -= Time.deltaTime;
-            }
-            if (target.position.x > transform.position.x)
-            {
-                theSR.flipX = true;
+                enemy.velocity = (target.position - transform.position).normalized * moveSpeed;
+                //攻击间隔时间
+                if (hitCounter > 0f)
+                {
+                    hitCounter -= Time.deltaTime;
+                }
+                if (target.position.x > transform.position.x)
+                {
+                    theSR.flipX = true;
+                }
+                else
+                {
+                    theSR.flipX = false;
+                }
             }
             else
             {
-                theSR.flipX = false;
+                enemy.velocity = Vector2.zero;
             }
-        }
-        else
-        {
-            enemy.velocity = Vector2.zero;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

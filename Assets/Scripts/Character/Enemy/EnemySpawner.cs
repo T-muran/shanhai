@@ -23,15 +23,18 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        spawnCounter -= Time.deltaTime;
-        //如果玩家死亡，不再生成敌人
-        if (spawnCounter <= 0 && PlayerHealthController.instance.currentHp > 0)
+        if (GameController.GetInstance().StateMachine.GetState<PlayState>(GameState.Play.ToString(), out PlayState playState))
         {
-            spawnCounter = timeToSpawn;
+            spawnCounter -= Time.deltaTime;
+            //如果玩家死亡，不再生成敌人
+            if (spawnCounter <= 0 && PlayerHealthController.instance.currentHp > 0)
+            {
+                spawnCounter = timeToSpawn;
 
-            Instantiate(enemyToSpawn, SelectSpawnPoint(), transform.rotation);
+                Instantiate(enemyToSpawn, SelectSpawnPoint(), transform.rotation);
+            }
+            transform.position = target.position;
         }
-        transform.position = target.position;
     }
 
     public Vector3 SelectSpawnPoint()
