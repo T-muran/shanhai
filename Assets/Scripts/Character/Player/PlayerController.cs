@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (GameController.GetInstance().StateMachine.GetState<PlayState>(GameController.GameState.Play.ToString(), out PlayState playState))
+        if (GameController.GetInstance().StateMachine.GetCurrentState().ToString().Equals("PlayState"))
         {
             inputDirection = inputControl.GamePlay.Move.ReadValue<Vector2>();
            // healthBar.position = new Vector2(transform.position.x, transform.position.y + 1.5f);
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameController.GetInstance().StateMachine.GetState<PlayState>(GameController.GameState.Play.ToString(), out PlayState playState))
+        if (GameController.GetInstance().StateMachine.GetCurrentState().ToString().Equals("PlayState"))
         {
             Move();
             Flip();

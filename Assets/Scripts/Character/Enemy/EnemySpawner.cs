@@ -23,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (GameController.GetInstance().StateMachine.GetState<PlayState>(GameController.GameState.Play.ToString(), out PlayState playState))
+        if (GameController.GetInstance().StateMachine.GetCurrentState().ToString().Equals("PlayState"))
         {
             spawnCounter -= Time.deltaTime;
             //如果玩家死亡，不再生成敌人

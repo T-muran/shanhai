@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameController.GetInstance().StateMachine.GetState<PlayState>(GameController.GameState.Play.ToString(), out PlayState playState)) {
+        if (GameController.GetInstance().StateMachine.GetCurrentState().ToString().Equals("PlayState")) {
             //如果玩家死亡，敌人不再移动
             if (PlayerHealthController.instance.currentHp > 0)
             {

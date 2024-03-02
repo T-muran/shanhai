@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using UnityEngine;
 
 public class StateMachine : IStateParent
@@ -23,7 +24,7 @@ public class StateMachine : IStateParent
 
     public void OnUpdate()=> currentState?.OnUpdate();
     public void OnFixedUpdate()=> currentState?.OnFixedUpdate();
-
+    public IState GetCurrentState()=>currentState;
     public void ChangeState(string toStateID)
     {
         if (!stateDict.ContainsKey(toStateID))
@@ -42,6 +43,7 @@ public class StateMachine : IStateParent
         }
         currentState = stateDict[toStateID];
         currentState.OnEnter();
+        Debug.Log($"...切换状态成功,当前状态为{currentState}.......");
     }
 
     public bool GetState<T>(string stateID, out T state) where T : class, IState, new()
@@ -77,4 +79,5 @@ public class StateMachine : IStateParent
             stateDict.Add(stateID, state);
         }
     }
+
 }
